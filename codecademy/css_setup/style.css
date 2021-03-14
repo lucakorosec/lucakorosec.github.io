@@ -37,3 +37,10 @@ p {
  h5{
    color: rebeccapurple;
  }
+
+h5,
+p{
+  font-family: Arial;
+}
+
+<!-- in der übung haben sie bei den restlichen paragraphen den tag p vergessen bis auf den ersten absatz, weshalb sich nur ebendieser verändert-->
