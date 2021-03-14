@@ -2,14 +2,19 @@ p {
     font-family: Arial;
     }
 
-h1 {
+  h1 {
       color: maroon;
     }
 
-.title{
+  .title{
       color: teal;
     }
 
-.uppercase{
+  .uppercase{
       text-transform: uppercase;
+    }
+
+    #article-title{
+      font-family: cursive;
+      text-transform: capitalize;
     }
