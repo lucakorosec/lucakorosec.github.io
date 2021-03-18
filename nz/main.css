@@ -77,6 +77,10 @@ footer .next {
     float: right;
 }
 
+footer .miau {
+    text-align: center;
+}
+
 footer .back {
     float: left;
      /*positionierung der links*/
@@ -84,5 +88,10 @@ footer .back {
 
 footer {
     padding: 1em 0 3em 0;
-        /*rand oben, links, unten, rechts abstand*/
+    /*rand oben, links, unten, rechts abstand*/
+}
+
+.mr3 {
+    margin-right:0.3em ;
+    /*abstand der icons zum text*/
 }
