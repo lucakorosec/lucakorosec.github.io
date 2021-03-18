@@ -2,7 +2,8 @@ body {
     max-width: 1280px;
     margin: auto;
     font-family: Arial, Helvetica, sans-serif;
-}
+    /*max breite der seite und autozentrierung*/
+}   
 
 header {
     text-align: center;
@@ -14,17 +15,20 @@ header p {
     font-size: 0.8em;
     padding-right: 1em;
     margin-top: -2em;
-}
+    /*schrift rechtsbündig, hinein ins bild verschoben und vom rand weg*/
+}   
 
 .white,
 .white a:link,
 .white a:visited {
     color: white;
-}
+    /*die klasse white, der link in der klasse white, der angeklickte link in der klasse white*/
+}   
 
 header nav img {
     border-radius: 50%;
-}
+    /*rundes autorbild*/
+}   
 
 a:link,
 a:visited {
@@ -40,7 +44,8 @@ header address {
 main {
     max-width: 70%;
     margin: auto;
-}
+    /*nur 70% der breite verwenden, zentrierung automatisch*/
+}   
 
 main p {
     text-align: justify;
@@ -54,12 +59,14 @@ main figure {
 
 main figure img {
     border: 1px solid black;
+    /*rahmen um bild*/
 }
 
 #map {
     height: 360px;
     width: 100%;
     border: 1px solid gray;
+    /*platzhalter karte mit rahmen*/
 }
 
 main ul {
@@ -72,6 +79,7 @@ footer .next {
 
 footer .back {
     float: left;
+     /*positionierung der links*/
 }
 
 footer {
