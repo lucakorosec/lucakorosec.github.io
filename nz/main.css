@@ -1,9 +1,9 @@
 body {
     max-width: 1280px;
     margin: auto;
-   font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     /*max breite der seite und autozentrierung*/
-}   
+}
 
 header {
     text-align: center;
@@ -16,23 +16,23 @@ header p {
     padding-right: 1em;
     margin-top: -2em;
     /*schrift rechtsbündig, hinein ins bild verschoben und vom rand weg*/
-}   
+}
 
 .white,
 .white a:link,
 .white a:visited {
     color: white;
     /*die klasse white, der link in der klasse white, der angeklickte link in der klasse white*/
-}   
+}
 
 header nav img {
     border-radius: 50%;
     /*rundes autorbild*/
-}   
+}
 
 a:link,
 a:visited {
-    color:black;
+    color: black;
 }
 
 header address {
@@ -45,7 +45,7 @@ main {
     max-width: 70%;
     margin: auto;
     /*nur 70% der breite verwenden, zentrierung automatisch*/
-}   
+}
 
 main p {
     font-family: 'Roboto Condensed', sans-serif;
@@ -84,7 +84,7 @@ footer .miau {
 
 footer .back {
     float: left;
-     /*positionierung der links*/
+    /*positionierung der links*/
 }
 
 footer {
@@ -93,7 +93,7 @@ footer {
 }
 
 .mr3 {
-    margin-right:0.3em ;
+    margin-right: 0.3em;
     /*abstand der icons zum text*/
 }
 
