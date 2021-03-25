@@ -14,8 +14,8 @@ let stop = {
 //console.log(stop.lat);
 
 const map = L.map("map", {
-    center: [stop.lat, stop.lng],
-    zoom: 13,
+   // center: [stop.lat, stop.lng],
+   // zoom: 13,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
@@ -34,6 +34,7 @@ for (let entry of ROUTE) {
         `); /* marker und marker immer anzeigen*/
 
         if (entry.nr == 15) {
+            map.setView([entry.lat, entry.lng], 13);
             mrk.openPopup();
         }
 }
