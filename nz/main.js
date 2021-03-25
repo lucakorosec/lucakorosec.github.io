@@ -1,15 +1,30 @@
 
 console.log(L);
 
+let stop = {
+    nr: 15,
+    name: "Franz-Josef-Gletscher",
+    lat: -43.4668631325,
+    lng: 170.188249247,
+    user: "lucakorosec",
+    wikipedia: "https://de.wikipedia.org/wiki/Franz-Josef-Gletscher"
+};
+//console.log(stop);
+//console.log(stop.name);
+//console.log(stop.lat);
+
 const map = L.map("map", {
-    center: [-43.4668631325, 170.188249247],
+    center: [stop.lat, stop.lng],
     zoom: 13,
     layers: [
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{z}.png")
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
 });
 
-let mrk = L.marker([-43.4668631325, 170.188249247]).addTo(map);
-mrk.bindPopup("Franz-Josef-Gletscher").openPopup();
+let mrk = L.marker([stop.lat, stop.lng]).addTo(map);
+mrk.bindPopup(`
+    <h4>${stop.nr}: ${stop.name}</h4>
+        <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}"> Read about stop in Wikipedia</a></p>
+`).openPopup(); /* marker und marker immer anzeigen*/
 
-console.log(document.querySelector("#map")); /* raute map sucht mir das element mit der ID = Map)*/
+//console.log(document.querySelector("#map")); /* raute map sucht mir das element mit der ID = Map)*/
