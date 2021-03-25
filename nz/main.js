@@ -23,7 +23,8 @@ const map = L.map("map", {
 let nav = document.querySelector("#navigation");
 
 
-ROUTE.sort((stop1, stop2) => { /* sortieren nach nummer im dropdown */
+ROUTE.sort((stop1, stop2) => {
+    /* sortieren nach nummer im dropdown */
     return stop1.nr > stop2.nr
 });
 
@@ -59,7 +60,7 @@ nav.options.selectedIndex = 15 - 1; /* wählt im dropdown den eigenen stop aus b
 nav.onchange = (evt) => {
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
-    let username =options[selected].value;
+    let username = options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
     console.log(username, link);
 
