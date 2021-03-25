@@ -23,7 +23,7 @@ const map = L.map("map", {
 let nav = document.querySelector("#navigation");
 
 
-ROUTE.sort((stop1, stop2) => {
+ROUTE.sort((stop1, stop2) => { /* sortieren nach nummer im dropdown */
     return stop1.nr > stop2.nr
 });
 
@@ -54,6 +54,12 @@ mrk.bindPopup(`
     <h4>${stop.nr}: ${stop.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}"> Read about stop in Wikipedia</a></p>
 `).openPopup(); /* marker und marker immer anzeigen*/
+
+nav.onchange = (evt) => {
+    console.log(evt);
+};
+
+
 
 //<option value="lucakorosec">Franz-Josef-Gletscher</option>
 
