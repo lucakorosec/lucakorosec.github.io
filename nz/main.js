@@ -21,6 +21,9 @@ const map = L.map("map", {
     ]
 });
 
+
+console.log(ROUTE); /*testen ob er die variablen in der route.js alle erkennt*/
+
 let mrk = L.marker([stop.lat, stop.lng]).addTo(map);
 mrk.bindPopup(`
     <h4>${stop.nr}: ${stop.name}</h4>
