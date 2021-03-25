@@ -23,19 +23,20 @@ const map = L.map("map", {
 
 
 console.log(ROUTE); /*testen ob er die variablen in der route.js alle erkennt*/
+
 for (let entry of ROUTE) {
     console.log(entry); /*schleife dass er alle einträge in der route.js durchlaufen und anschrieben soll*/
 
         
-        let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
+        let mrk = L.marker([entry.lat, entry.lng]).addTo(map); /* marker für alle anderen stops erstellen*/
         mrk.bindPopup(`
          <h4>${entry.nr}: ${entry.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${entry.wikipedia}"> Read about stop in Wikipedia</a></p>
-        `); /* marker und marker immer anzeigen*/
+        `); 
 
-        if (entry.nr == 15) {
+        if (entry.nr == 15) { /* wenn die nr 15 im route.js gefunden wird dann zeigt er diese im zentrum an und zeigt das popup an */
             map.setView([entry.lat, entry.lng], 13);
-            mrk.openPopup();
+            mrk.openPopup(); /* marker und marker immer anzeigen*/
         }
 }
 
