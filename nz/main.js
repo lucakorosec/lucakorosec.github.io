@@ -56,10 +56,12 @@ mrk.bindPopup(`
 `).openPopup(); /* marker und marker immer anzeigen*/
 
 nav.onchange = (evt) => {
-    console.log(evt);
+    let selected = evt.target.selectedIndex;
+    let options = evt.target.options;
+    let username =options[selected].value;
+    let link = `https://${username}.github.io/nz/index.html`;
+    console.log(username, link);
 };
-
-
 
 //<option value="lucakorosec">Franz-Josef-Gletscher</option>
 
