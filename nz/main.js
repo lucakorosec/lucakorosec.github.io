@@ -10,5 +10,6 @@ const map = L.map("map", {
 });
 
 let mrk = L.marker([-43.4668631325, 170.188249247]).addTo(map);
+mrk.bindPopup("Franz-Josef-Gletscher").openPopup();
 
 console.log(document.querySelector("#map")); /* raute map sucht mir das element mit der ID = Map)*/
