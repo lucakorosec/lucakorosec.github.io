@@ -23,6 +23,17 @@ const map = L.map("map", {
 
 
 console.log(ROUTE); /*testen ob er die variablen in der route.js alle erkennt*/
+for (let entry of ROUTE) {
+    console.log(entry); /*schleife dass er alle einträge in der route.js durchlaufen und anschrieben soll*/
+
+        
+        let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
+        mrk.bindPopup(`
+         <h4>${entry.nr}: ${entry.name}</h4>
+        <p><i class="fas fa-external-link-alt mr-3"></i><a href="${entry.wikipedia}"> Read about stop in Wikipedia</a></p>
+        `).openPopup(); /* marker und marker immer anzeigen*/
+
+}
 
 let mrk = L.marker([stop.lat, stop.lng]).addTo(map);
 mrk.bindPopup(`
