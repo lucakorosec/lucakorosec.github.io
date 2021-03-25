@@ -61,6 +61,8 @@ nav.onchange = (evt) => {
     let username =options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
     console.log(username, link);
+
+    window.location.href = link; /* er geht auf das ausgewählte dropdown dingi und öffnet den vorab gespeicherten githgub link */
 };
 
 //<option value="lucakorosec">Franz-Josef-Gletscher</option>
