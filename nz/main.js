@@ -55,6 +55,7 @@ mrk.bindPopup(`
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}"> Read about stop in Wikipedia</a></p>
 `).openPopup(); /* marker und marker immer anzeigen*/
 
+nav.options.selectedIndex = 15 - 1; /* wählt im dropdown den eigenen stop aus bzw den geöffneten */
 nav.onchange = (evt) => {
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
