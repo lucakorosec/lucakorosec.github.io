@@ -20,11 +20,16 @@ const map = L.map("map", {
     ]
 });
 
+let nav = document.querySelector("#navigation");
 
 console.log(ROUTE); /*testen ob er die variablen in der route.js alle erkennt*/
 
 for (let entry of ROUTE) {
     console.log(entry); /*schleife dass er alle einträge in der route.js durchlaufen und anschrieben soll*/
+
+    nav.innerHTML += `
+        <option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>
+    `;
 
     let mrk = L.marker([entry.lat, entry.lng]).addTo(map); /* marker für alle anderen stops erstellen*/
     mrk.bindPopup(`
