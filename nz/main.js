@@ -31,8 +31,11 @@ for (let entry of ROUTE) {
         mrk.bindPopup(`
          <h4>${entry.nr}: ${entry.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${entry.wikipedia}"> Read about stop in Wikipedia</a></p>
-        `).openPopup(); /* marker und marker immer anzeigen*/
+        `); /* marker und marker immer anzeigen*/
 
+        if (entry.nr == 15) {
+            mrk.openPopup();
+        }
 }
 
 let mrk = L.marker([stop.lat, stop.lng]).addTo(map);
