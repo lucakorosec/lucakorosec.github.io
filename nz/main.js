@@ -1,4 +1,3 @@
-
 console.log(L);
 
 let stop = {
@@ -14,8 +13,8 @@ let stop = {
 //console.log(stop.lat);
 
 const map = L.map("map", {
-   // center: [stop.lat, stop.lng],
-   // zoom: 13,
+    // center: [stop.lat, stop.lng],
+    // zoom: 13,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
@@ -27,17 +26,17 @@ console.log(ROUTE); /*testen ob er die variablen in der route.js alle erkennt*/
 for (let entry of ROUTE) {
     console.log(entry); /*schleife dass er alle einträge in der route.js durchlaufen und anschrieben soll*/
 
-        
-        let mrk = L.marker([entry.lat, entry.lng]).addTo(map); /* marker für alle anderen stops erstellen*/
-        mrk.bindPopup(`
+    let mrk = L.marker([entry.lat, entry.lng]).addTo(map); /* marker für alle anderen stops erstellen*/
+    mrk.bindPopup(`
          <h4>${entry.nr}: ${entry.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${entry.wikipedia}"> Read about stop in Wikipedia</a></p>
-        `); 
+        `); /* die entry einträge sind alles links zum route.js file..das man oben entry gennant hat  */
 
-        if (entry.nr == 15) { /* wenn die nr 15 im route.js gefunden wird dann zeigt er diese im zentrum an und zeigt das popup an */
-            map.setView([entry.lat, entry.lng], 13);
-            mrk.openPopup(); /* marker und marker immer anzeigen*/
-        }
+    if (entry.nr == 15) {
+        /* wenn die nr 15 im route.js gefunden wird dann zeigt er diese im zentrum an und zeigt das popup an */
+        map.setView([entry.lat, entry.lng], 13);
+        mrk.openPopup(); /* marker und marker immer anzeigen*/
+    }
 }
 
 let mrk = L.marker([stop.lat, stop.lng]).addTo(map);
@@ -45,5 +44,7 @@ mrk.bindPopup(`
     <h4>${stop.nr}: ${stop.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i><a href="${stop.wikipedia}"> Read about stop in Wikipedia</a></p>
 `).openPopup(); /* marker und marker immer anzeigen*/
+
+//<option value="lucakorosec">Franz-Josef-Gletscher</option>
 
 //console.log(document.querySelector("#map")); /* raute map sucht mir das element mit der ID = Map)*/
