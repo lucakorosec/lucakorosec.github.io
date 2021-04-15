@@ -45,6 +45,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 [station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
+            marker.bindPopup(`<h3>${station.properties.name}</h3>`); //name hinzufügen bei den markern
             marker.addTo(map);
         }
 });
