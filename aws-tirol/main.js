@@ -57,11 +57,13 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             <h3>${station.properties.name}</h3>
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
-                <li>Seehöhe: ${station.geometry.coordinates[2]} m.ü.A.</li>
-                <li>Temperatur: ${station.properties.LT} C</li>
-                <li>Lufttemperatur: ${station.properties.LT} C</li>
-                <li>Schneehöhe: ${station.properties.HS} m</li>
+                <li>Seehöhe: ${station.geometry.coordinates[2] ||'?'} m.ü.A.</li>
+                <li>Temperatur: ${station.properties.LT ||'?'} C</li>
+                <li>Windrichtung: ${station.properties.WR ||'?'}</li>
+                <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
+                <li>Schneehöhe: ${station.properties.HS} cm</li>
             </ul>
+            <a target="blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `); //name hinzufügen bei den markern
                 //extra infos als liste zu den popups hinzugefügt
             marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 34 erstellt haben gespeichert
