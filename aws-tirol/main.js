@@ -31,7 +31,7 @@ let layerControl = L.control.layers({
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 
-let awsLayer = L.featureGroup(); //erstelle layergruppe um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
+let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
 awsLayer.addTo(map); //staandard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
 
@@ -50,15 +50,18 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
+            
             let formattedDate = new Date(station.properties.date); //neues datumsobjekt erstellen, in Zeile 58 wird darauf zurückgegriffen, de als ländereinstellung 
+            
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
-
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
+                <li>Seehöhe: ${station.geometry.coordinates[2]} m.ü.A.</li>
                 <li>Temperatur: ${station.properties.LT} C</li>
+                <li>Lufttemperatur: ${station.properties.LT} C</li>
+                <li>Schneehöhe: ${station.properties.HS} m</li>
             </ul>
-            
             `); //name hinzufügen bei den markern
                 //extra infos als liste zu den popups hinzugefügt
             marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 34 erstellt haben gespeichert
