@@ -30,6 +30,11 @@ let layerControl = L.control.layers({
 
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
+
+let awsLayer = L.featureGroup(); //erstelle layergruppe um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
+layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
+awsLayer.addTo(map); //staandard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
+
 // mit let die varibael benannt in awsurl, mit fetch soll er die daten aus datagvat laden, mit then soll er eine "response" < so nennen wir es, sagen dass es geladen und eine json ist
 //und mit console.log in der f12 console soll stehen wenn die daten als json erkannt und geladen worden sind in zeile 1 schreiben
 //for jede station in der json datenbank (sind darin als feature bezeichnet) soll er in der f12 console station schreiben
@@ -41,11 +46,13 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         console.log('Daten konvertiert: ', json);
         for (station of json.features) {
             console.log('Station: ', station);
-            let marker  = L.marker(
-                [station.geometry.coordinates[1],
+            let marker  = L.marker([
+                station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
             marker.bindPopup(`<h3>${station.properties.name}</h3>`); //name hinzufügen bei den markern
-            marker.addTo(map);
+            marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 34 erstellt haben gespeichert
         }
+        // set map view to all stations
+        map.fitBounds(awsLayer.getBounds());
 });
