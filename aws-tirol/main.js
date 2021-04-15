@@ -50,7 +50,16 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
-            marker.bindPopup(`<h3>${station.properties.name}</h3>`); //name hinzufügen bei den markern
+            marker.bindPopup(`
+            <h3>${station.properties.name}</h3>
+
+            <ul>
+                <li>Datum: ${station.properties.date}</li>
+                <li>Temperatur: ${station.properties.LT} C</li>
+            </ul>
+            
+            `); //name hinzufügen bei den markern
+                //extra infos als liste zu den popups hinzugefügt
             marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 34 erstellt haben gespeichert
         }
         // set map view to all stations
