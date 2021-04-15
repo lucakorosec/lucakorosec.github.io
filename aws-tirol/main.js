@@ -33,7 +33,15 @@ let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
-awsLayer.addTo(map); //staandard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
+//awsLayer.addTo(map); //staandard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
+
+let snowLayer = L.featureGroup();
+layerControl.addOverlay(snowLayer, "Schneehöhen");
+snowLayer.addTo(map);
+
+let windLayer = L.featureGroup();
+layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
+//windLayer.addTo(map)
 
 // mit let die varibael benannt in awsurl, mit fetch soll er die daten aus datagvat laden, mit then soll er eine "response" < so nennen wir es, sagen dass es geladen und eine json ist
 //und mit console.log in der f12 console soll stehen wenn die daten als json erkannt und geladen worden sind in zeile 1 schreiben
@@ -61,12 +69,56 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 <li>Temperatur: ${station.properties.LT ||'?'} C</li>
                 <li>Windrichtung: ${station.properties.WR ||'?'}</li>
                 <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
-                <li>Schneehöhe: ${station.properties.HS} cm</li>
+                <li>Schneehöhe: ${station.properties.HS ||'?'} cm</li>
             </ul>
             <a target="blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `); //name hinzufügen bei den markern
                 //extra infos als liste zu den popups hinzugefügt
+
             marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 34 erstellt haben gespeichert
+            if (station.properties.HS) {
+                let highlightClass = '';
+                if (station.properties.HS > 100) {
+                    highlightClass = 'snow-100';
+                }
+                if (station.properties.HS > 200) {
+                        highlightClass = 'snow-200';
+                }
+                let snowIcon = L.divIcon ({
+                    html: `<div class="snow-lable ${highlightClass}">${station.properties.HS}</div>`
+                })
+                let snowMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: snowIcon
+                });
+                snowMarker.addTo(snowLayer);
+            }
+
+            marker.addTo(awsLayer);
+            if (station.properties.WG) {
+                let highlightClass = '';
+                if (station.properties.WG > 10) {
+                    highlightClass = 'wind-10';
+                }
+                if (station.properties.HS > 15) {
+                        highlightClass = 'wind-15';
+                }
+                let windIcon = L.divIcon ({
+                    html: `<div class="wind-lable ${highlightClass}">${station.properties.WG}</div>`
+                })
+                let windMarker = L.marker([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: windIcon
+                });
+                windMarker.addTo(windLayer);
+            }
+
+
+
         }
         // set map view to all stations
         map.fitBounds(awsLayer.getBounds());
