@@ -1,6 +1,7 @@
-
+//https://leafletjs.com/reference-1.7.1.html#tilelayer
 let basemapGray = L.tileLayer.provider('BasemapAT.grau'); //provider ist ein dingi das mir die karten reinladet
 
+//https://leafletjs.com/reference-1.7.1.html#map-l-map
 let map = L.map ("map", {
     center: [47, 11],
     zoom: 9,
@@ -13,6 +14,8 @@ let map = L.map ("map", {
 // baselayer von der provider seite auf unsere seite reinladen https://cdnjs.com/libraries/leaflet-providers
 //L greift auf leaflet zu, control den script zu controls in der L bibliothek und layers sag i selber
 
+
+//https://leafletjs.com/reference-1.7.1.html#control-layers-l-control-layers
 let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschalten
     "BasemapAT.grau": basemapGray,
     "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
@@ -22,6 +25,7 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "BasemapAT.basemap": L.tileLayer.provider('BasemapAT.basemap'),
     //das erste rote ist was dann auf der seite im drop down steht
     //layer kombinieren
+    //https://leafletjs.com/reference-1.7.1.html#layergroup-l-layergroup
     "BasemapAT.overlay+ortho": L.layerGroup([
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
@@ -32,7 +36,7 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
 
-
+//https://leafletjs.com/reference-1.7.1.html#featuregroup-l-featuregroup
 let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
 //awsLayer.addTo(map); //standard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
@@ -62,6 +66,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         console.log('Daten konvertiert: ', json);
         for (station of json.features) {
             console.log('Station: ', station);
+            //https://leafletjs.com/reference-1.7.1.html#marker-l-marker
             let marker  = L.marker([
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
@@ -100,7 +105,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 }
                 if (station.properties.HS > 200) {
                     highlightClass = 'snow-200';
-                }
+                } //https://leafletjs.com/reference-1.7.1.html#divicon-l-divicon
                 let snowIcon = L.divIcon ({
                     html: `<div class="snow-lable ${highlightClass}">${station.properties.HS}</div>`
                 })
@@ -171,6 +176,9 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         map.fitBounds(awsLayer.getBounds());       
 });
 
+
+
+//L.map L.featureGroup L.marker L.divIcon L.layerGroup L.control.layers L.tileLayer.provider
 
 
 // statt dem if === 0 kann man eigentlich auch eine if <= 0 machen denk ih, hab aber eine eigene klasse erstellt, da ja die 0 auch nicht negativ ist
