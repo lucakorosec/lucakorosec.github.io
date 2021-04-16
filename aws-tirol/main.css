@@ -10,13 +10,13 @@ h2 {
 }
 
 .snow-lable {
-   font-size: 1.25em;
-   font-weight: bold;
-   display: inline;
-   padding: 0.3em;
-   border: 1px solid gray;
-   background-color: silver;
-   text-shadow:
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid gray;
+    background-color: silver;
+    text-shadow:
         -1px -1px 0 white,
         -1px -1px 0 white,
         -1px -1px 0 white,
@@ -31,8 +31,6 @@ h2 {
     background-color: red;
 }
 
-
-
 .wind-lable {
     font-size: 1.25em;
     font-weight: bold;
@@ -41,11 +39,12 @@ h2 {
     border: 1px solid gray;
     background-color: silver;
     text-shadow:
-         -1px -1px 0 white,
-         -1px -1px 0 white,
-         -1px -1px 0 white,
-         -1px -1px 0 white;
- }
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
 .wind-10 {
     background-color: blue;
 }
@@ -62,11 +61,12 @@ h2 {
     border: 1px solid gray;
     background-color: silver;
     text-shadow:
-         -1px -1px 0 white,
-         -1px -1px 0 white,
-         -1px -1px 0 white,
-         -1px -1px 0 white;
- }
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
 .luft-neg {
     background-color: blue;
 }
