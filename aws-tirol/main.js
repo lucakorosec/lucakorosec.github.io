@@ -168,5 +168,5 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
         }
         // set map view to all stations
-        map.fitBounds(awsLayer.getBounds());
+        map.fitBounds(awsLayer.getBounds());       
 });
