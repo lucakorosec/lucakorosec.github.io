@@ -33,7 +33,6 @@ let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben di
 
 
 
-
 let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
 //awsLayer.addTo(map); //standard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
@@ -44,9 +43,11 @@ layerControl.addOverlay(snowLayer, "Schneehöhen");
 
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
-windLayer.addTo(map);
+// windLayer.addTo(map);
 
-
+let luftLayer = L.featureGroup();
+layerControl.addOverlay(luftLayer, "Lufttemperatur");
+luftLayer.addTo(map);
 
 
 
@@ -78,7 +79,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             <ul>
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
                 <li>Seehöhe: ${station.geometry.coordinates[2] ||'?'} m.ü.A.</li>
-                <li>Temperatur: ${station.properties.LT ||'?'} C</li>
+                <li>Temperatur: ${station.properties.LT ||'?'} °C</li>
                 <li>Windrichtung: ${station.properties.WR ||'?'}</li>
                 <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
                 <li>Schneehöhe: ${station.properties.HS ||'?'} cm</li>
@@ -138,6 +139,31 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             }
 
 
+
+
+            marker.addTo(awsLayer);
+            if (station.properties.LT) {
+                let lufthighlightClass = '';
+                if (station.properties.LT < 0){
+                    lufthighlightClass = 'luft-neg';
+                }
+                if (station.properties.LT === 0){
+                    lufthighlightClass = 'luft-0';
+                }
+                if (station.properties.LT > 0) {
+                    lufthighlightClass = 'luft-pos';
+                }
+                let luftIcon = L.divIcon ({ //damit kann wert in marker schreiben der angezeigt wird im popup
+                    html: `<div class="luft-lable ${lufthighlightClass}">${station.properties.LT}</div>`
+                })
+                let luftMarker = L.marker ([
+                    station.geometry.coordinates[1],
+                    station.geometry.coordinates[0]
+                ], {
+                    icon: luftIcon
+                });
+                luftMarker.addTo(luftLayer);
+            }
 
 
         }
