@@ -153,7 +153,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 if (station.properties.LT > 0) {
                     lufthighlightClass = 'luft-pos';
                 }
-                let luftIcon = L.divIcon ({ //damit kann wert in marker schreiben der angezeigt wird im popup
+                let luftIcon = L.divIcon ({
                     html: `<div class="luft-lable ${lufthighlightClass}">${station.properties.LT}</div>`
                 })
                 let luftMarker = L.marker ([
@@ -170,3 +170,9 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         // set map view to all stations
         map.fitBounds(awsLayer.getBounds());       
 });
+
+
+
+// statt dem if === 0 kann man eigentlich auch eine if <= 0 machen denk ih, hab aber eine eigene klasse erstellt, da ja die 0 auch nicht negativ ist
+// ich beautify diese js datei ungern, da die kommentare sonst teilweise quer durcheinandergeschoben werden :D
+// liebe grüße lucakorosec
