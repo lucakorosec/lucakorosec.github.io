@@ -67,9 +67,6 @@ let getColor = (value, colorRamp) => {
     return "black"
 };
 
-
-
-
 let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
     let color = getColor(options.value, options.colors);
     //console.log("Wert", options.value, "bekommt Farbe", color)
@@ -82,9 +79,6 @@ let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN 
         });
         return marker;
     };
-
-
-
 
 
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
@@ -146,7 +140,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
             if (typeof station.properties.HS == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
-                    value: station.properties.HS,
+                    value: station.properties.HS.toFixed(0),
                     colors: COLORS.snowheight
                 });
                 marker.addTo(overlays.snowheight);
@@ -154,7 +148,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             
             if (typeof station.properties.WG == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
-                    value: station.properties.WG,
+                    value: station.properties.WG.toFixed(0),
                     colors: COLORS.windspeed
                 });
                 marker.addTo(overlays.windspeed);
@@ -162,7 +156,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
             if (typeof station.properties.LT == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
-                    value: station.properties.LT,
+                    value: station.properties.LT.toFixed(1),//wenn nummer und das ist es bei uns, kann man den wert runden auf xy nachkommerstellen
                     colors: COLORS.temperature
                 });
                 marker.addTo(overlays.temperature);
