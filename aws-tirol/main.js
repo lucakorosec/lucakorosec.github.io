@@ -2,11 +2,11 @@
 let basemapGray = L.tileLayer.provider('BasemapAT.grau'); //provider ist ein dingi das mir die karten reinladet
 
 //https://leafletjs.com/reference-1.7.1.html#map-l-map
-let map = L.map ("map", {
+let map = L.map("map", {
     center: [47, 11],
     zoom: 9,
     layers: [
-       // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
         basemapGray
     ]
 });
@@ -38,13 +38,13 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
     ])
-},{ //overlays objekt
+}, { //overlays objekt
     "Wetterstationen Tirol": overlays.stations,
     "Temperatur (°C)": overlays.temperature,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection
-},{
+}, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
 overlays.temperature.addTo(map);
@@ -52,9 +52,7 @@ overlays.temperature.addTo(map);
 L.control.scale({ //massstab hinzugefügt
     maxWidth: 200,
     imperial: false,
-    }).addTo(map);
-
-
+}).addTo(map);
 
 
 let getColor = (value, colorRamp) => {
@@ -72,15 +70,14 @@ let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN 
     //console.log("Wert", options.value, "bekommt Farbe", color)
     let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
         html: `<div style="background-color:${color}">${options.value}</div>`,
-            className: "text-label"
-        })
-        let marker = L.marker([coords[1], coords[0]], {
-            icon: lable,
-            title: `${options.station} (${coords[2]}m)`
-
-        });
-        return marker;
-    };
+        className: "text-label"
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: lable,
+        title: `${options.station} (${coords[2]}m)`
+    });
+    return marker;
+};
 
 
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
@@ -116,11 +113,11 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         for (station of json.features) {
             //console.log('Station: ', station);
             //https://leafletjs.com/reference-1.7.1.html#marker-l-marker
-            let marker  = L.marker([
+            let marker = L.marker([
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
-            
+
             let formattedDate = new Date(station.properties.date); //neues datumsobjekt erstellen, in Zeile 58 wird darauf zurückgegriffen, de als ländereinstellung 
 
             marker.bindPopup(`
@@ -135,22 +132,22 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             </ul>
             <a target="blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `); //name hinzufügen bei den markern
-                //extra infos als liste zu den popups hinzugefügt
-                // link zur grafik die hinterlegt sind zur jeweiligen station
+            //extra infos als liste zu den popups hinzugefügt
+            // link zur grafik die hinterlegt sind zur jeweiligen station
 
 
             marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
             if (typeof station.properties.HS == "number") {
-                let marker = newLabel (station.geometry.coordinates, {
+                let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.HS.toFixed(0),
                     colors: COLORS.snowheight,
                     station: station.properties.name
                 });
                 marker.addTo(overlays.snowheight);
             }
-            
+
             if (typeof station.properties.WG == "number") {
-                let marker = newLabel (station.geometry.coordinates, {
+                let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.WG.toFixed(0),
                     colors: COLORS.windspeed,
                     station: station.properties.name
@@ -159,8 +156,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             }
 
             if (typeof station.properties.LT == "number") {
-                let marker = newLabel (station.geometry.coordinates, {
-                    value: station.properties.LT.toFixed(1),//wenn nummer und das ist es bei uns, kann man den wert runden auf xy nachkommerstellen
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.LT.toFixed(1), //wenn nummer und das ist es bei uns, kann man den wert runden auf xy nachkommerstellen
                     colors: COLORS.temperature,
                     station: station.properties.name
                 });
@@ -168,17 +165,5 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             }
         }
         // set map view to all stations
-        map.fitBounds(overlays.stations.getBounds());       
-});
-
-
-
-
-
-//alte FUNKTIONS ART
-//let sayHello = function(message) {
- //   console.log(message);
-   // return `Hallo ${message}`;
-//};
-//let answer = sayHello = ("Klaus");
-//console.log(answer);
+        map.fitBounds(overlays.stations.getBounds());
+    });
