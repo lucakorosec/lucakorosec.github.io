@@ -61,7 +61,7 @@ let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben di
 
 //let windLayer = L.featureGroup();
 //layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
-// windLayer.addTo(map);
+//windLayer.addTo(map);
 
 //let luftLayer = L.featureGroup();
 //layerControl.addOverlay(luftLayer, "Lufttemperatur");
