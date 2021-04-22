@@ -1,0 +1,80 @@
+h2 {
+    text-align: center;
+}
+
+#map {
+    width: 90vw;
+    height: 90vh;
+    border: solid black 1px;
+    margin: auto;
+}
+
+.snow-lable {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid gray;
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
+.snow-100 {
+    background-color: blue;
+}
+
+.snow-200 {
+    background-color: red;
+}
+
+.wind-lable {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid gray;
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
+.wind-10 {
+    background-color: blue;
+}
+
+.wind-20 {
+    background-color: red;
+}
+
+.luft-lable {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid gray;
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white;
+}
+
+.luft-neg {
+    background-color: blue;
+}
+
+.luft-pos {
+    background-color: green;
+}
+
+.luft-0 {
+    background-color: gray;
+}

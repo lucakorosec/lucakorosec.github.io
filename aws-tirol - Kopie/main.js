@@ -23,10 +23,9 @@ let overlays = {
     winddirection: L.featureGroup(),
 };
 
-
 //https://leafletjs.com/reference-1.7.1.html#control-layers-l-control-layers
 let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschalten
-    "BasemapAT.grau": basemapGray, //basemap objekt
+    "BasemapAT.grau": basemapGray,
     "BasemapAT.orthofoto": L.tileLayer.provider('BasemapAT.orthofoto'),
     "BasemapAT.terrain": L.tileLayer.provider('BasemapAT.terrain'),
     "BasemapAT.surface": L.tileLayer.provider('BasemapAT.surface'), //"BasemapAT.overlay": L.tileLayer.provider('BasemapAT.overlay'),
@@ -38,34 +37,28 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
         L.tileLayer.provider('BasemapAT.orthofoto'),
         L.tileLayer.provider('BasemapAT.overlay')
     ])
-},{ //overlays objekt
-    "Wetterstationen Tirol": overlays.stations,
-    "Temperatur (°C)": overlays.temperature,
-    "Schneehöhe (cm)": overlays.snowheight,
-    "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
-overlays.temperature.addTo(map);
+
 
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
 
 //https://leafletjs.com/reference-1.7.1.html#featuregroup-l-featuregroup
-//let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
-//layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
+let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
+layerControl.addOverlay(awsLayer, "Wetterstationen Tirol"); // extra auswahlpunkt im dropdown mit wetterstationen Tirol
 //awsLayer.addTo(map); //standard einstellung dass die stationen angezeigt werden und im dropdown auschaltbar sind
 
-//let snowLayer = L.featureGroup();
-//layerControl.addOverlay(snowLayer, "Schneehöhen");
+let snowLayer = L.featureGroup();
+layerControl.addOverlay(snowLayer, "Schneehöhen");
 //snowLayer.addTo(map);
 
-//let windLayer = L.featureGroup();
-//layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
+let windLayer = L.featureGroup();
+layerControl.addOverlay(windLayer, "Windgeschwindigkeit");
 // windLayer.addTo(map);
 
-//let luftLayer = L.featureGroup();
-//layerControl.addOverlay(luftLayer, "Lufttemperatur");
-//luftLayer.addTo(map);
+let luftLayer = L.featureGroup();
+layerControl.addOverlay(luftLayer, "Lufttemperatur");
+luftLayer.addTo(map);
 
 
 
@@ -111,7 +104,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.snowheight); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
+            marker.addTo(awsLayer); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
             if (station.properties.HS) {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
@@ -136,7 +129,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.windspeed);
+            marker.addTo(awsLayer);
             if (station.properties.WG) {
                 let windhighlightClass = '';
                 if (station.properties.WG > 10) {
@@ -160,7 +153,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.temperature);
+            marker.addTo(awsLayer);
             if (station.properties.LT) {
                 let lufthighlightClass = '';
                 if (station.properties.LT < 0){
@@ -187,7 +180,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
         }
         // set map view to all stations
-        map.fitBounds(overlays.stations.getBounds());       
+        map.fitBounds(awsLayer.getBounds());       
 });
 
 
