@@ -54,6 +54,20 @@ L.control.scale({ //massstab hinzugefügt
     imperial: false,
     }).addTo(map);
 
+
+
+    let newLable = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
+        console.log("Koordinaten coords: ", coords );
+        console.log("Optionsobjekt: ", options);
+        let marker = L.marker([coords[1], coords[0]]);
+        console.log("Marker:", marker);
+        return marker;
+        //Label erstellen
+        //den Label zurückgeben
+    };
+
+
+
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
 
@@ -96,8 +110,6 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
             let formattedDate = new Date(station.properties.date); //neues datumsobjekt erstellen, in Zeile 58 wird darauf zurückgegriffen, de als ländereinstellung 
-            
-
 
 
             marker.bindPopup(`
@@ -140,9 +152,6 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             }
 
 
-
-
-
             marker.addTo(overlays.stations);
             if (typeof station.properties.WG == "number") {
                 let windhighlightClass = '';
@@ -165,30 +174,12 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             }
 
 
-
-
             marker.addTo(overlays.stations);
             if (typeof station.properties.LT == "number") {
-                let lufthighlightClass = '';
-                if (station.properties.LT < 0){
-                    lufthighlightClass = 'luft-neg';
-                }
-                if (station.properties.LT == 0){
-                    lufthighlightClass = 'luft-0';
-                }
-                if (station.properties.LT > 0) {
-                    lufthighlightClass = 'luft-pos';
-                }
-                let luftIcon = L.divIcon ({
-                    html: `<div class="luft-lable ${lufthighlightClass}">${station.properties.LT}</div>`
-                })
-                let luftMarker = L.marker ([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: luftIcon
+                let marker = newLable (station.geometry.coordinates, {
+                    value: station.properties.LT
                 });
-                luftMarker.addTo(overlays.temperature);
+                marker.addTo(overlays.temperature);
             }
 
 
@@ -199,4 +190,12 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-//L.map L.featureGroup L.marker L.divIcon L.layerGroup L.control.layers L.tileLayer.provider
+
+
+//alte FUNKTIONS ART
+//let sayHello = function(message) {
+ //   console.log(message);
+   // return `Hallo ${message}`;
+//};
+//let answer = sayHello = ("Klaus");
+//console.log(answer);
