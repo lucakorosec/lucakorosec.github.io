@@ -62,8 +62,6 @@ L.control.scale({ //massstab hinzugefügt
         let marker = L.marker([coords[1], coords[0]]);
         console.log("Marker:", marker);
         return marker;
-        //Label erstellen
-        //den Label zurückgeben
     };
 
 
@@ -100,17 +98,14 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
     .then(json => { //weiterarbeiten mit json
         console.log('Daten konvertiert: ', json);
         for (station of json.features) {
-            console.log('Station: ', station);
+            //console.log('Station: ', station);
             //https://leafletjs.com/reference-1.7.1.html#marker-l-marker
             let marker  = L.marker([
                 station.geometry.coordinates[1],
                 station.geometry.coordinates[0]
             ]);
             
-
-
             let formattedDate = new Date(station.properties.date); //neues datumsobjekt erstellen, in Zeile 58 wird darauf zurückgegriffen, de als ländereinstellung 
-
 
             marker.bindPopup(`
             <h3>${station.properties.name}</h3>
@@ -126,8 +121,6 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             `); //name hinzufügen bei den markern
                 //extra infos als liste zu den popups hinzugefügt
                 // link zur grafik die hinterlegt sind zur jeweiligen station
-
-
 
 
             marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
