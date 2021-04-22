@@ -75,7 +75,9 @@ let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN 
             className: "text-label"
         })
         let marker = L.marker([coords[1], coords[0]], {
-            icon: lable
+            icon: lable,
+            title: `${options.station} (${coords[2]}m)`
+
         });
         return marker;
     };
@@ -141,7 +143,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             if (typeof station.properties.HS == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
                     value: station.properties.HS.toFixed(0),
-                    colors: COLORS.snowheight
+                    colors: COLORS.snowheight,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.snowheight);
             }
@@ -149,7 +152,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             if (typeof station.properties.WG == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
                     value: station.properties.WG.toFixed(0),
-                    colors: COLORS.windspeed
+                    colors: COLORS.windspeed,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.windspeed);
             }
@@ -157,7 +161,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
             if (typeof station.properties.LT == "number") {
                 let marker = newLabel (station.geometry.coordinates, {
                     value: station.properties.LT.toFixed(1),//wenn nummer und das ist es bei uns, kann man den wert runden auf xy nachkommerstellen
-                    colors: COLORS.temperature
+                    colors: COLORS.temperature,
+                    station: station.properties.name
                 });
                 marker.addTo(overlays.temperature);
             }
