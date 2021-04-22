@@ -71,9 +71,10 @@ let getColor = (value, colorRamp) => {
 
 
 let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
-    let color = getColor(options.value, options.colors)
+    let color = getColor(options.value, options.colors);
+    //console.log("Wert", options.value, "bekommt Farbe", color)
     let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
-        html: `<div>${options.value}</div>`,
+        html: `<div style="background-color:${color}">${options.value}</div>`,
             className: "text-label"
         })
         let marker = L.marker([coords[1], coords[0]], {
