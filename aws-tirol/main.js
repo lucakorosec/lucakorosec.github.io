@@ -44,6 +44,8 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection
+},{
+    collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
 overlays.temperature.addTo(map);
 
@@ -129,7 +131,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 ], {
                     icon: snowIcon
                 });
-                snowMarker.addTo(snowLayer);
+                snowMarker.addTo(overlays.snowheight);
             }
 
 
@@ -154,7 +156,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 ], {
                     icon: windIcon
                 });
-                windMarker.addTo(windLayer);
+                windMarker.addTo(overlays.windspeed);
             }
 
 
@@ -181,7 +183,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 ], {
                     icon: luftIcon
                 });
-                luftMarker.addTo(luftLayer);
+                luftMarker.addTo(overlays.temperature);
             }
 
 
