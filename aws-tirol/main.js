@@ -59,6 +59,12 @@ L.control.scale({ //massstab hinzugefügt
 
 let getColor = (value, colorRamp) => {
     console.log("wert: ", value, "Palette: ", colorRamp);
+    for (let rule of colorRamp) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.col;
+        }
+    }
+    return "black"
 };
 
 
