@@ -118,8 +118,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.snowheight); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
-            if (station.properties.HS) {
+            marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
+            if (typeof station.properties.HS == "number") {
                 let highlightClass = '';
                 if (station.properties.HS > 100) {
                     highlightClass = 'snow-100';
@@ -143,8 +143,8 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.windspeed);
-            if (station.properties.WG) {
+            marker.addTo(overlays.stations);
+            if (typeof station.properties.WG == "number") {
                 let windhighlightClass = '';
                 if (station.properties.WG > 10) {
                     windhighlightClass = 'wind-10';
@@ -167,13 +167,13 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 
-            marker.addTo(overlays.temperature);
-            if (station.properties.LT) {
+            marker.addTo(overlays.stations);
+            if (typeof station.properties.LT == "number") {
                 let lufthighlightClass = '';
                 if (station.properties.LT < 0){
                     lufthighlightClass = 'luft-neg';
                 }
-                if (station.properties.LT === 0){
+                if (station.properties.LT == 0){
                     lufthighlightClass = 'luft-0';
                 }
                 if (station.properties.LT > 0) {
@@ -200,8 +200,3 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
 
 //L.map L.featureGroup L.marker L.divIcon L.layerGroup L.control.layers L.tileLayer.provider
-
-
-// statt dem if === 0 kann man eigentlich auch eine if <= 0 machen denk ih, hab aber eine eigene klasse erstellt, da ja die 0 auch nicht negativ ist
-// ich beautify diese js datei ungern, da die kommentare sonst teilweise quer durcheinandergeschoben werden :D
-// liebe grüße lucakorosec
