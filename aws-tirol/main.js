@@ -56,9 +56,18 @@ L.control.scale({ //massstab hinzugefügt
 
 
 
-    let newLable = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
-        let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
-            html: `<div>${options.value}</div>`,
+
+let getColor = (value, colorRamp) => {
+    console.log("wert: ", value, "Palette: ", colorRamp);
+};
+
+
+
+
+let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
+    let color = getColor(options.value, options.colors)
+    let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
+        html: `<div>${options.value}</div>`,
             className: "text-label"
         })
         let marker = L.marker([coords[1], coords[0]], {
@@ -69,8 +78,9 @@ L.control.scale({ //massstab hinzugefügt
 
 
 
-let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
+
+let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
 //https://leafletjs.com/reference-1.7.1.html#featuregroup-l-featuregroup
 //let awsLayer = L.featureGroup(); //erstelle layergruppe awslayers um die stationen alle darinzuspeichern um alle gemeinsam ansprechen zu können
@@ -128,31 +138,28 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
             marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
             if (typeof station.properties.HS == "number") {
-                let marker = newLable (station.geometry.coordinates, {
-                    value: station.properties.HS
+                let marker = newLabel (station.geometry.coordinates, {
+                    value: station.properties.HS,
+                    colors: COLORS.snowheight
                 });
                 marker.addTo(overlays.snowheight);
             }
-
-
-            marker.addTo(overlays.stations);
+            
             if (typeof station.properties.WG == "number") {
-                let marker = newLable (station.geometry.coordinates, {
-                    value: station.properties.WG
+                let marker = newLabel (station.geometry.coordinates, {
+                    value: station.properties.WG,
+                    colors: COLORS.windspeed
                 });
                 marker.addTo(overlays.windspeed);
             }
 
-
-            marker.addTo(overlays.stations);
             if (typeof station.properties.LT == "number") {
-                let marker = newLable (station.geometry.coordinates, {
-                    value: station.properties.LT
+                let marker = newLabel (station.geometry.coordinates, {
+                    value: station.properties.LT,
+                    colors: COLORS.temperature
                 });
                 marker.addTo(overlays.temperature);
             }
-
-
         }
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());       
