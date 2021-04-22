@@ -57,10 +57,13 @@ L.control.scale({ //massstab hinzugefügt
 
 
     let newLable = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
-        console.log("Koordinaten coords: ", coords );
-        console.log("Optionsobjekt: ", options);
-        let marker = L.marker([coords[1], coords[0]]);
-        console.log("Marker:", marker);
+        let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
+            html: `<div>${options.value}</div>`,
+            className: "text-label"
+        })
+        let marker = L.marker([coords[1], coords[0]], {
+            icon: lable
+        });
         return marker;
     };
 
