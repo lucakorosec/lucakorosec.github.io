@@ -128,45 +128,19 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
 
             marker.addTo(overlays.stations); //marker werden in den layergruppe aws layer denn wir in Zeile 38 erstellt haben gespeichert
             if (typeof station.properties.HS == "number") {
-                let highlightClass = '';
-                if (station.properties.HS > 100) {
-                    highlightClass = 'snow-100';
-                }
-                if (station.properties.HS > 200) {
-                    highlightClass = 'snow-200';
-                } //https://leafletjs.com/reference-1.7.1.html#divicon-l-divicon
-                let snowIcon = L.divIcon ({
-                    html: `<div class="snow-lable ${highlightClass}">${station.properties.HS}</div>`
-                })
-                let snowMarker = L.marker ([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: snowIcon
+                let marker = newLable (station.geometry.coordinates, {
+                    value: station.properties.HS
                 });
-                snowMarker.addTo(overlays.snowheight);
+                marker.addTo(overlays.snowheight);
             }
 
 
             marker.addTo(overlays.stations);
             if (typeof station.properties.WG == "number") {
-                let windhighlightClass = '';
-                if (station.properties.WG > 10) {
-                    windhighlightClass = 'wind-10';
-                }
-                if (station.properties.WG > 20) {
-                    windhighlightClass = 'wind-20';
-                }
-                let windIcon = L.divIcon ({ //damit kann wert in marker schreiben der angezeigt wird im popup
-                    html: `<div class="wind-lable ${windhighlightClass}">${station.properties.WG}</div>`
-                })
-                let windMarker = L.marker ([
-                    station.geometry.coordinates[1],
-                    station.geometry.coordinates[0]
-                ], {
-                    icon: windIcon
+                let marker = newLable (station.geometry.coordinates, {
+                    value: station.properties.WG
                 });
-                windMarker.addTo(overlays.windspeed);
+                marker.addTo(overlays.windspeed);
             }
 
 
