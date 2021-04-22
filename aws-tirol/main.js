@@ -49,6 +49,11 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
 overlays.temperature.addTo(map);
 
+L.control.scale({ //massstab hinzugefügt
+    maxWidth: 200,
+    imperial: false,
+    }).addTo(map);
+
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
 
