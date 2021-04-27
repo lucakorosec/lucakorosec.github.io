@@ -56,6 +56,16 @@ L.control.scale({ //massstab hinzugefügt
     imperial: false,
 }).addTo(map);
 
+L.control.rainviewer({
+    position: 'topleft',
+    nextButtonText: '>',
+    playStopButtonText: 'Start/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Uhrzeit:",
+    opacitySliderLabelText: "Deckkraft:",
+    animationInterval: 500,
+    opacity: 0.8
+}).addTo(map);
 
 let getColor = (value, colorRamp) => {
     console.log("wert: ", value, "Palette: ", colorRamp);
