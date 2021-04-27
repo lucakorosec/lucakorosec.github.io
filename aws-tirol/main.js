@@ -45,7 +45,7 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "Luftfeuchtigkeit (%)": overlays.humidity,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection
+    "Windrichtung (°)": overlays.winddirection
 }, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
