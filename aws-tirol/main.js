@@ -21,6 +21,7 @@ let overlays = {
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
     winddirection: L.featureGroup(),
+    humidity: L.featureGroup(),
 };
 
 
@@ -43,7 +44,8 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "Temperatur (°C)": overlays.temperature,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection
+    "Windrichtung": overlays.winddirection,
+    "Luftfeuchtigkeit": overlays.humidity,
 }, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
@@ -129,6 +131,7 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 <li>Windrichtung: ${station.properties.WR ||'?'}</li>
                 <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
                 <li>Schneehöhe: ${station.properties.HS ||'?'} cm</li>
+                <li>Luftfeuchtigkeit: ${station.properties.RH ||'?'} %</li>
             </ul>
             <a target="blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `); //name hinzufügen bei den markern
@@ -162,6 +165,15 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                     station: station.properties.name
                 });
                 marker.addTo(overlays.temperature);
+            }
+
+            if (typeof station.properties.RH == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.RH.toFixed(1), //wenn nummer und das ist es bei uns, kann man den wert runden auf xy nachkommerstellen
+                    colors: COLORS.humidity,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.humidity);
             }
         }
         // set map view to all stations
