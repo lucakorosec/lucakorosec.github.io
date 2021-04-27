@@ -45,7 +45,7 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection,
-    "Luftfeuchtigkeit": overlays.humidity,
+    "Luftfeuchtigkeit (%)": overlays.humidity,
 }, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
@@ -56,7 +56,7 @@ L.control.scale({ //massstab hinzugefügt
     imperial: false,
 }).addTo(map);
 
-L.control.rainviewer({
+L.control.rainviewer({ // Rainviewer einfügen
     position: 'topleft',
     nextButtonText: '>',
     playStopButtonText: 'Start/Stop',
@@ -74,12 +74,12 @@ let getColor = (value, colorRamp) => {
             return rule.col;
         }
     }
-    return "black"
+    return "black";
 };
 
 let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN bei den 3 if abfragen
     let color = getColor(options.value, options.colors);
-    //console.log("Wert", options.value, "bekommt Farbe", color)
+    //console.log("Wert", options.value, "bekommt Farbe", color);
     let lable = L.divIcon({ // habe ein label (selber so genannt) definiert und gesagt dass es ein divIcon ist und 1. value zugewiesen und icon
         html: `<div style="background-color:${color}">${options.value}</div>`,
         className: "text-label"
@@ -91,6 +91,29 @@ let newLabel = (coords, options) => { //FUNKTION DIE ALLES MACHT WAS WIR WOLLEN 
     return marker;
 };
 
+// Windrichtungen von Graden in den dazugehörigen Himmelsrichtung umwandeln/zuweisen
+let getDirection = (direction, richtung) => {
+    console.log("Wert: ", direction);
+    for (let rule of richtung) {
+        if ((direction >= rule.min) && (direction < rule.max)) {
+            return rule.dir
+        }
+    }
+};
+
+// Windrichtung als (Kompass) Text im Lable hinzufügen
+let newDirection = (coords, options) => {
+    let direction = getDirection(options.value, options.directions);
+    let label = L.divIcon({
+        html: `<div>${direction}</div>`,
+        className: "text-label",
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label,
+        title: `${options.station} (${coords[2]} m)`
+    });
+    return marker;
+};
 
 let awsURL = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson'; //haben die url mit den daten zu den wetterstationen in variabel awsURL gesopeichert
 
@@ -184,6 +207,15 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                     station: station.properties.name
                 });
                 marker.addTo(overlays.humidity);
+            }
+
+            if (typeof station.properties.WR == "number") {
+                let marker = newDirection(station.geometry.coordinates, {
+                    value: station.properties.WR,
+                    directions: DIRECTIONS,
+                    station: station.properties.name,
+                });
+                marker.addTo(overlays.winddirection);
             }
         }
         // set map view to all stations
