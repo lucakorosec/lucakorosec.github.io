@@ -42,21 +42,23 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
 }, { //overlays objekt
     "Wetterstationen Tirol": overlays.stations,
     "Temperatur (°C)": overlays.temperature,
+    "Luftfeuchtigkeit (%)": overlays.humidity,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung": overlays.winddirection,
-    "Luftfeuchtigkeit (%)": overlays.humidity,
+    "Windrichtung": overlays.winddirection
 }, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
 overlays.temperature.addTo(map);
 
-L.control.scale({ //massstab hinzugefügt
+//massstab hinzugefügt
+L.control.scale({
     maxWidth: 200,
     imperial: false,
 }).addTo(map);
 
-L.control.rainviewer({ // Rainviewer einfügen
+// Rainviewer einfügen
+L.control.rainviewer({
     position: 'topleft',
     nextButtonText: '>',
     playStopButtonText: 'Start/Stop',
