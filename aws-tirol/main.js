@@ -45,7 +45,7 @@ let layerControl = L.control.layers({ //dropdownmenu mit karten aus und einschal
     "Luftfeuchtigkeit (%)": overlays.humidity,
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
-    "Windrichtung (°)": overlays.winddirection
+    "Windrichtung": overlays.winddirection
 }, {
     collapsed: false //overlay control ist immer ausgeklappt
 }).addTo(map); //zur karte hinzufügen. muss bei L passieren am ende von der schleife
@@ -163,10 +163,10 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
                 <li>Datum: ${formattedDate.toLocaleString("de")}</li>
                 <li>Seehöhe: ${station.geometry.coordinates[2] ||'?'} m.ü.A.</li>
                 <li>Temperatur: ${station.properties.LT ||'?'} °C</li>
-                <li>Windrichtung: ${station.properties.WR ||'?'}</li>
-                <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
-                <li>Schneehöhe: ${station.properties.HS ||'?'} cm</li>
                 <li>Luftfeuchtigkeit: ${station.properties.RH ||'?'} %</li>
+                <li>Schneehöhe: ${station.properties.HS ||'?'} cm</li>
+                <li>Windgeschwindigkeit: ${station.properties.WG ||'?'} km/h</li>
+                <li>Windrichtung: ${station.properties.WR ||'?'} °</li>
             </ul>
             <a target="blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
             `); //name hinzufügen bei den markern
