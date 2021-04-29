@@ -68,23 +68,23 @@ let drawBusStop = (geojsonData) => {
     }).addTo(overlays.busStops);
 }
 
-for (let config of OGDWIEN) {
-    console.log("Config: ", config.data);
-    fetch(config.data)
-        .then(response => response.json())
-        .then(geojsonData => {
-            console.log("Data: ", geojsonData);
-            if (config.title == "Haltestellen Vienna Sightseeing") {
-                drawBusStop(geojsonData);
-            }
-        })
-}
-
-
 let drawBusLine = (geojsonData) => {
+    console.log('Buslines: ', geojsonData);
     L.geoJson(geojsonData, {
+        style: (feature) => { //objekte (linien) in ihrem stil beeinflussen
+            let col = "red";
+            if (feature.properties.LINE_NAME == 'Blue Line') {
+                col = 'blue';
+            }
+            return {
+                color: col
+            }
+        },
         onEachFeature: (feature, layer) => { //popup für jedes feature (in den data daten)
-            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>`)
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            von ${feature.properties.FROM_NAME}<br>
+            nach ${feature.properties.TO_NAME}`)
         },
         attribution: '<a href="https://data.wien.gv.at"> Stadt Wien</a>'
     }).addTo(overlays.busLines);
@@ -96,7 +96,9 @@ for (let config of OGDWIEN) {
         .then(response => response.json())
         .then(geojsonData => {
             console.log("Data: ", geojsonData);
-            if (config.title == "Liniennetz Vienna Sightseeing") {
+            if (config.title == "Haltestellen Vienna Sightseeing") {
+                drawBusStop(geojsonData);
+            } else if (config.title == "Liniennetz Vienna Sightseeing") {
                 drawBusLine(geojsonData);
             }
         })
