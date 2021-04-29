@@ -72,8 +72,7 @@ let drawBusLine = (geojsonData) => {
     console.log('Buslines: ', geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => { //objekte (linien) in ihrem stil beeinflussen
-            let col = "red";
-            col = COLORS.buslines[feature.properties.LINE_NAME] //das macht die kommenden zeilen alle überflüssig
+            let col = COLORS.buslines[feature.properties.LINE_NAME] //das macht die kommenden zeilen alle überflüssig
             //            if (feature.properties.LINE_NAME == 'Blue Line') {
             //                col = COLORS.buslines["Blue Line"];
             //            }
@@ -97,16 +96,42 @@ let drawBusLine = (geojsonData) => {
     }).addTo(overlays.busLines);
 }
 
+let drawPedestrianAreas = (geojsonData) => {
+    console.log('Zone: ', geojsonData);
+    L.geoJson(geojsonData, {
+        style: (feature) => {
+            return {
+                stroke: true,
+                color: "silver",
+                fillColor: "yellow",
+                fillOpacity: 0.3
+            }
+        },
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>Fußgängerzone ${feature.properties.ADRESSE}</strong>
+            <hr>
+            ${feature.properties.ZEITRAUM} <br>
+            ${feature.properties.AUSN_TEXT}
+            `);
+        }
+    }).addTo(overlays.pedAreas);
+}
+
+
+
+
 for (let config of OGDWIEN) {
-    console.log("Config: ", config.data);
+    // console.log("Config: ", config.data);
     fetch(config.data)
         .then(response => response.json())
         .then(geojsonData => {
-            console.log("Data: ", geojsonData);
+            // console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") {
                 drawBusStop(geojsonData);
             } else if (config.title == "Liniennetz Vienna Sightseeing") {
                 drawBusLine(geojsonData);
+            } else if (config.title === "Fußgängerzonen") {
+                drawPedestrianAreas(geojsonData);
             }
         })
 }
