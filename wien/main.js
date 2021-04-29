@@ -127,7 +127,7 @@ let drawAttractions = (geojsonData) => {
             layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
             <hr>
             Adresse: ${feature.properties.ADRESSE}<br>
-            Website: <a href:"${feature.properties.WEITERE_INF}"> klick here </a>`)
+            Website: <a href="${feature.properties.WEITERE_INF}"> klick here </a>`)
         },
         pointToLayer: (geoJsonPoint, latlng) => { //icon selber definieren
             return L.marker(latlng, {
@@ -137,7 +137,7 @@ let drawAttractions = (geojsonData) => {
                 })
             })
         },
-        attribution: '<a href="https://data.wien.gv.at"> Stadt Wien</a> , <a href="https://mapicons.mapsmarker.com"> Maps Icon Collection</a>'
+        attribution: '<a href="https://data.wien.gv.at"> Stadt Wien</a>'
     }).addTo(overlays.Attractions);
 }
 
@@ -155,7 +155,7 @@ for (let config of OGDWIEN) {
             } else if (config.title === "Fußgängerzonen") {
                 drawPedestrianAreas(geojsonData);
             } else if (config.title === "Sehenswürdigkeiten") {
-                drawAttractions (geojsonData);
+                drawAttractions(geojsonData);
             }
         })
 }
