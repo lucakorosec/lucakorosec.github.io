@@ -124,9 +124,10 @@ let drawPedestrianAreas = (geojsonData) => {
 let drawAttractions = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => { //popup für jedes feature (in den data daten)
-            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
             <hr>
-            Station: ${feature.properties.STAT_NAME}`)
+            Adresse: ${feature.properties.ADRESSE}<br>
+            Website ${feature.properties.WEITERE_INF}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => { //icon selber definieren
             return L.marker(latlng, {
