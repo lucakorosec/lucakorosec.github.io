@@ -47,3 +47,14 @@ let layerControl = L.control.layers({
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
+
+// ohne vorschleifen einfach die daten aus der geojson in die karte hinzugefügt
+fetch("data/TOURISTIKHTSVSLOGD.json")
+    .then(response => response.json())
+    .then(stations => {
+        L.geoJson(stations, {
+            onEachFeature: (feature, layer) => {
+                layer.bindPopup(feature.properties.STAT_NAME)
+            }
+        }).addTo(map)
+    })
