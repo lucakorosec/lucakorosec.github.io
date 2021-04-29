@@ -52,7 +52,9 @@ overlays.pedAreas.addTo(map);
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => { //popup für jedes feature (in den data daten)
-            layer.bindPopup(feature.properties.STAT_NAME)
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            Station: ${feature.properties.STAT_NAME}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => { //icon selber definieren
             return L.marker(latlng, {
@@ -61,7 +63,8 @@ let drawBusStop = (geojsonData) => {
                     iconSeize: [25, 25]
                 })
             })
-        }
+        },
+        attribution: '<a href="https://data.wien.gv.at"> Stadt Wien</a> , <a href="https://mapicons.mapsmarker.com"> Maps Icon Collection</a>'
     }).addTo(overlays.busStops);
 }
 
