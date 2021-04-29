@@ -127,7 +127,7 @@ let drawAttractions = (geojsonData) => {
             layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
             <hr>
             Adresse: ${feature.properties.ADRESSE}<br>
-            Website ${feature.properties.WEITERE_INF}`)
+            Website: <a href:"${feature.properties.WEITERE_INF}"> klick here </a>`)
         },
         pointToLayer: (geoJsonPoint, latlng) => { //icon selber definieren
             return L.marker(latlng, {
