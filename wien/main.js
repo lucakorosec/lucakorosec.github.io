@@ -17,7 +17,8 @@ let baselayers = {
 let overlays = {
     busLines: L.featureGroup(),
     busStops: L.featureGroup(),
-    pedAreas: L.featureGroup()
+    pedAreas: L.featureGroup(),
+    Attractions: L.featureGroup()
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -40,13 +41,15 @@ let layerControl = L.control.layers({
 }, {
     "Liniennetz Vienna Sightseeing": overlays.busLines,
     "Haltestellen Vienna Sightseeing": overlays.busStops,
-    "Fußgängerzonen": overlays.pedAreas
+    "Fußgängerzonen": overlays.pedAreas,
+    "Sehenswürdigkeiten": overlays.Attractions
 }).addTo(map);
 
 // alle Overlays nach dem Laden anzeigen
 overlays.busLines.addTo(map);
 overlays.busStops.addTo(map);
 overlays.pedAreas.addTo(map);
+overlays.Attractions.addTo(map);
 
 
 let drawBusStop = (geojsonData) => {
@@ -118,6 +121,24 @@ let drawPedestrianAreas = (geojsonData) => {
 }
 
 
+let drawAttractions = (geojsonData) => {
+    L.geoJson(geojsonData, {
+        onEachFeature: (feature, layer) => { //popup für jedes feature (in den data daten)
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            Station: ${feature.properties.STAT_NAME}`)
+        },
+        pointToLayer: (geoJsonPoint, latlng) => { //icon selber definieren
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: 'icons/sehenswuerdigogd.png',
+                    iconSeize: [25, 25]
+                })
+            })
+        },
+        attribution: '<a href="https://data.wien.gv.at"> Stadt Wien</a> , <a href="https://mapicons.mapsmarker.com"> Maps Icon Collection</a>'
+    }).addTo(overlays.Attractions);
+}
 
 
 for (let config of OGDWIEN) {
@@ -132,6 +153,8 @@ for (let config of OGDWIEN) {
                 drawBusLine(geojsonData);
             } else if (config.title === "Fußgängerzonen") {
                 drawPedestrianAreas(geojsonData);
+            } else if (config.title === "Sehenswürdigkeiten") {
+                drawAttractions (geojsonData);
             }
         })
 }
