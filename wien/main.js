@@ -23,7 +23,7 @@ let overlays = {
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
 let map = L.map("map", {
-    fullscreenControl: true,
+    fullscreenControl: true, //leaflet fullscreen
     center: [48.208333, 16.373056],
     zoom: 13,
     layers: [
