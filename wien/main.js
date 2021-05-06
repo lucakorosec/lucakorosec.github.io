@@ -16,9 +16,9 @@ let baselayers = {
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
     busLines: L.featureGroup(),
-    busStops: L.markerClusterGroup(),
+    busStops: L.markerClusterGroup(), // wird jetzt als leaflet marker cluster angezeigt
     pedAreas: L.featureGroup(),
-    Attractions: L.markerClusterGroup() // wird jetzt als leaflet marker cluster angezeigt
+    Attractions: L.featureGroup()
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
