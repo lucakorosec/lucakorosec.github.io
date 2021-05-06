@@ -183,3 +183,9 @@ var miniMap = new L.Control.MiniMap(
         position: 'bottomleft'
     }
 ).addTo(map);
+
+// Leaflet reachability
+L.control.reachability({
+    // add settings/options here
+    apiKey: '5b3ce3597851110001cf6248bab096c0a5b74fe195e462cd7e2f8ba4'
+}).addTo(map);
