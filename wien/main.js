@@ -173,7 +173,7 @@ L.hash(map);
 //minimap v2
 //var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 //var osmAttrib='Map data &copy; OpenStreetMap contributors';
-//var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib});
+//var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib, position: 'bottomleft});
 //var miniMap = new L.Control.MiniMap(osm2).addTo(map);
 
 //minimap v3
