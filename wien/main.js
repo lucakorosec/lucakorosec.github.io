@@ -195,7 +195,7 @@ L.control.reachability({
     distanceButtonContent: '',
     distanceButtonStyleClass: 'fa fa-road',
     timeButtonContent: '',
-    timeButtonStyleClass: 'far fa-clock',
+    timeButtonStyleClass: 'fas fa-clock',
     travelModeButton1Content: '',
     travelModeButton1StyleClass: 'fa fa-car',
     travelModeButton2Content: '',
