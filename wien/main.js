@@ -186,9 +186,23 @@ var miniMap = new L.Control.MiniMap(
 
 // Leaflet reachability
 let styleIntervals =  (feature) => {
-    console.log(feature.properties);
-}
-
+    //console.log(feature.properties);
+    //console.log(feature.properties.Measure);
+    let farbe = "";
+    let range = feature.properties.Range;
+        if (feature.properties.Measure === "time"){
+            farbe = COLORS.minutes[range];
+        } else if (feature.properties.Measure === "distance"){
+            farbe = COLORS.kilometers[range];
+        } else {
+            color = "black";
+        }
+        return {
+            color: farbe,
+            opacity: 0.5,
+            fillOpacity: 0.2
+        }; 
+};
 
 L.control.reachability({
     // add settings/options here
