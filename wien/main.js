@@ -11,7 +11,9 @@ let baselayers = {
         L.tileLayer.provider("BasemapAT.orthofoto"),
         L.tileLayer.provider("BasemapAT.overlay")
     ]),
+    //minimapTest: L.tileLayer.provider("Esri.WorldImagery",{minZoom: 0, maxZoom: 13}) // minimap v1
 };
+
 
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
@@ -164,3 +166,20 @@ for (let config of OGDWIEN) {
 
 // Leaflet hash
 L.hash(map);
+
+// minimap v1
+//var miniMap = new L.Control.MiniMap(baselayers.minimapTest).addTo(map);
+
+//minimap v2
+//var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+//var osmAttrib='Map data &copy; OpenStreetMap contributors';
+//var osm2 = new L.TileLayer(osmUrl, {minZoom: 0, maxZoom: 13, attribution: osmAttrib});
+//var miniMap = new L.Control.MiniMap(osm2).addTo(map);
+
+//minimap v3
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"), {
+        toggleDisplay: true,
+        position: 'bottomleft'
+    }
+).addTo(map);
