@@ -185,9 +185,15 @@ var miniMap = new L.Control.MiniMap(
 ).addTo(map);
 
 // Leaflet reachability
+let styleIntervals =  (feature) => {
+    console.log(feature.properties);
+}
+
+
 L.control.reachability({
     // add settings/options here
     apiKey: '5b3ce3597851110001cf6248bab096c0a5b74fe195e462cd7e2f8ba4',
+    styleFn: styleIntervals,
     drawButtonContent: '',
     drawButtonStyleClass: 'fas fa-pencil-alt fa-2x',
     deleteButtonContent: '',
@@ -203,5 +209,5 @@ L.control.reachability({
     travelModeButton3Content: '',
     travelModeButton3StyleClass: 'fa fa-male fa-2x',
     travelModeButton4Content: '',
-    travelModeButton4StyleClass: 'fas fa-wheelchair fa-2x'
+    travelModeButton4StyleClass: 'fas fa-wheelchair fa-2x',
 }).addTo(map);
