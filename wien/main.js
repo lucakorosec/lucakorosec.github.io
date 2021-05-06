@@ -187,5 +187,21 @@ var miniMap = new L.Control.MiniMap(
 // Leaflet reachability
 L.control.reachability({
     // add settings/options here
-    apiKey: '5b3ce3597851110001cf6248bab096c0a5b74fe195e462cd7e2f8ba4'
+    apiKey: '5b3ce3597851110001cf6248bab096c0a5b74fe195e462cd7e2f8ba4',
+    drawButtonContent: '',
+    drawButtonStyleClass: 'fas fa-pencil-alt',
+    deleteButtonContent: '',
+    deleteButtonStyleClass: 'fa fa-trash',
+    distanceButtonContent: '',
+    distanceButtonStyleClass: 'fa fa-road',
+    timeButtonContent: '',
+    timeButtonStyleClass: 'far fa-clock',
+    travelModeButton1Content: '',
+    travelModeButton1StyleClass: 'fa fa-car',
+    travelModeButton2Content: '',
+    travelModeButton2StyleClass: 'fa fa-bicycle',
+    travelModeButton3Content: '',
+    travelModeButton3StyleClass: 'fa fa-male',
+    travelModeButton4Content: '',
+    travelModeButton4StyleClass: 'fas fa-wheelchair'
 }).addTo(map);
