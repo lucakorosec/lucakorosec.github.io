@@ -5,6 +5,7 @@ let basemapGray = L.tileLayer.provider('BasemapAT.grau'); //provider ist ein din
 let map = L.map("map", {
     center: [47, 11],
     zoom: 9,
+    fullscreenControl: true, //leaflet fullscreen
     layers: [
         // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
         basemapGray
@@ -55,6 +56,7 @@ overlays.temperature.addTo(map);
 L.control.scale({
     maxWidth: 200,
     imperial: false,
+    position: 'bottomleft'
 }).addTo(map);
 
 // Rainviewer einfügen
@@ -223,3 +225,10 @@ fetch(awsURL) //daten herunterladen von der datagvat bib
         // set map view to all stations
         map.fitBounds(overlays.stations.getBounds());
     });
+
+
+    // Leaflet minimap 
+var miniMap = new L.Control.MiniMap(L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
+    toggleDisplay: true,
+    minimized: false,
+}).addTo(map);
