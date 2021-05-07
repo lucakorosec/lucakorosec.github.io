@@ -70,3 +70,13 @@ nav.onchange = (evt) => {
 //<option value="lucakorosec">Franz-Josef-Gletscher</option>
 
 //console.log(document.querySelector("#map")); /* raute map sucht mir das element mit der ID = Map)*/
+
+
+// Leaflet minimap 
+var miniMap = new L.Control.MiniMap(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"), {
+    toggleDisplay: true,
+    minimized: false,
+    minZoom: 0,
+    maxZoom: 13,
+    position: 'bottomleft'
+}).addTo(map);
