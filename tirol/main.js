@@ -47,5 +47,5 @@ const drawTrack = (nr) => {
     console.log('Track: ', nr);
 };
 
-const selectedTrack = 7;
+const selectedTrack = 6;
 drawTrack(selectedTrack);
