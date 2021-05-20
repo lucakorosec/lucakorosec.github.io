@@ -87,9 +87,9 @@ const selectedTrack = 6;
 drawTrack(selectedTrack);
 
 
-console.log('biketirol json: ', BIKETIROL);
+//console.log('biketirol json: ', BIKETIROL);
 let pulldown = document.querySelector("#pulldown");
-console.log('Pulldown: ', pulldown);
+//console.log('Pulldown: ', pulldown);
 let selected = '';
 for (let track of BIKETIROL) {
     if (selectedTrack == track.nr) {
@@ -101,6 +101,6 @@ for (let track of BIKETIROL) {
 }
 
 pulldown.onchange = () => {
-    console.log('changed!!!!!', pulldown.value);
+    //console.log('changed!!!!!', pulldown.value);
     drawTrack(pulldown.value);
 };
