@@ -64,7 +64,7 @@ const drawTrack = (nr) => {
             dashArray: [2, 5],
         },
     }).addTo(overlays.tracks);
-    //sobald gpx geladen ist , abgefangen und immer auf geladenen track zoomen in die mitte
+    //sobald gpx geladen ist + abgefangen und immer auf geladenen track zoomen in die mitte
     gpxTrack.on("loaded", () => {
         console.log('loaded gpx');
         map.fitBounds(gpxTrack.getBounds());
@@ -85,3 +85,6 @@ const drawTrack = (nr) => {
 
 const selectedTrack = 6;
 drawTrack(selectedTrack);
+
+
+console.log('biketirol.json: ', BIKETIROL);
