@@ -44,15 +44,24 @@ overlays.tracks.addTo(map);
 
 // funktion für eigene route, aber als funktion damit man hier jede andere route auch eingeben kann
 const drawTrack = (nr) => {
-    console.log('Track: ', nr);
+    //console.log('Track: ', nr);
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, { // L.GPX hinzufügen
         async: true, //lässt datei fertig laden
         marker_options: { //anfangs und endmarker wie bei L.GPX gefordert hinzufügen
             startIconUrl: `icons/number_${nr}.png`,
             endIconUrl: 'icons/finish.png',
             shadowUrl: null,
-        }
+        },
+        polyline_options: {
+            color: 'black',
+            dashArray: [2, 5],
+        },
     }).addTo(overlays.tracks);
+    //sobald gpx geladen ist , abgefangen und immer auf geladenen track zoomen in die mitte
+    gpxTrack.on("loaded", () => {
+        console.log('loaded gpx');
+        map.fitBounds(gpxTrack.getBounds());
+    })
 };
 
 const selectedTrack = 6;
