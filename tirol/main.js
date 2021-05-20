@@ -21,7 +21,6 @@ let overlays = {
 
 // Karte initialisieren und auf Innsbrucks Wikipedia Koordinate blicken
 let map = L.map("map", {
-    fullscreenControl: true,
     center: [47.267222, 11.392778],
     zoom: 9,
     layers: [
@@ -42,3 +41,11 @@ let layerControl = L.control.layers({
 
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
+
+// funktion für eigene route, aber als funktion damit man hier jede andere route auch eingeben kann
+const drawTrack = (nr) => {
+    console.log('Track: ', nr);
+};
+
+const selectedTrack = 7;
+drawTrack(selectedTrack);
