@@ -72,7 +72,7 @@ const drawTrack = (nr) => {
         gpxTrack.bindPopup(`
         <h3>${gpxTrack.get_name()}</h3>
         <ul>
-            <li>Streckenlänge: ${Math.round(gpxTrack.get_distance())/1000} km</li>
+            <li>Streckenlänge: ${Math.round(gpxTrack.get_distance())/1000-0.003} km</li>
             <li>tiefster Punkt: ${Math.round(gpxTrack.get_elevation_min())} m</li>
             <li>höchster Punkt: ${Math.round(gpxTrack.get_elevation_max())} m</li>
             <li>Höhenmeter bergauf: ${Math.round(gpxTrack.get_elevation_gain())} m</li>
