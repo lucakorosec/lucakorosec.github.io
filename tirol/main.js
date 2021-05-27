@@ -52,6 +52,13 @@ const elevationControl = L.control.elevation({
     theme: "gold-theme",
 }).addTo(map);
 
+//Wikipedia zeichnen
+const drawWikipedia = (bounds) => {
+    console.log(bounds);
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?&north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=lucakorosec`;
+    console.log(url);    
+};
+
 // funktion für eigene route, aber als funktion damit man hier jede andere route auch eingeben kann
 const drawTrack = (nr) => {
     //console.log('Track: ', nr);
@@ -87,6 +94,9 @@ const drawTrack = (nr) => {
     });
     elevationControl.load(`tracks/${nr}.gpx`);
 };
+
+//Wikipedia Artikel zeichnen
+drawWikipedia(gpxTrack.getBounds());
 
 const selectedTrack = 6;
 drawTrack(selectedTrack);
