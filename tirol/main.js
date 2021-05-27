@@ -186,6 +186,13 @@ drawTrack(selectedTrack);
 
 const updateTexts = (nr) => {
     console.log(nr);
+    for (let etappe of BIKETIROL) {
+        //console.log(etappe);
+        // ist es die aktuelle etappe ?
+        if (etappe.nr == nr) {
+            console.log("unsere Etappe", etappe)
+        }
+    }
 }
 
 // console.log('biketirol json: ', BIKETIROL);
