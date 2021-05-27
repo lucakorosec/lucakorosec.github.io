@@ -69,12 +69,21 @@ const drawWikipedia = (bounds) => {
             let mrk = L.marker([article.lat, article.lng]);
             mrk.addTo(overlays.wikipedia);
 
-            //Popup erzeugen
+            //optionales Bild definieren
             let img = "";
             if (article.thumbnailImg) {
                 img = `<img src="${article.thumbnailImg}"
                 alt="thumbnail">`;
             }
+
+            //Popup erzeugen mit jeweiligen Link der Geonam Wikipedia Artikel
+            mrk.bindPopup(`
+            <small>${article.feature}</small>
+            <h3>${article.title} (${article.elevation}m)</h3>
+            ${img}
+            <p>${article.summary}</p>
+            <a target="Wikipedia" href="https://${article.wikipediaUrl}">gesamter Wikipedia Artikel</a>
+            `)
         }
     });
 };
